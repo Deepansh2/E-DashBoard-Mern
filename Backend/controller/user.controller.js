@@ -12,6 +12,7 @@ exports.create = async (req,res) =>{
 
     try{
     const user = await User.create(userObj);
+    console.log(`new user ${user.name} created`)
     return res.status(201).send({
         message : "New User Created",
         User : user
