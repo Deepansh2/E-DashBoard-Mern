@@ -12,11 +12,11 @@ useEffect(()=>{
     if(auth){
         navigate("/")
     }
-})
+},[])
 const collectData = async ()=>{
     console.warn(name,email,password)
     const data = {name,email,password}
-    const result = await fetch("http://localhost:8000/mern/user",{
+    const result = await fetch("http://localhost:8000/mern/user/signup",{
         method:"POST",
         body:JSON.stringify(data),
         headers:{

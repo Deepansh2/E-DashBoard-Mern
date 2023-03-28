@@ -34,17 +34,17 @@ exports.signin = async (req,res) =>{
 
     try{
 
-    if(req.body.email){
+    if(!req.body.email){
         return res.status(400).send({
             message : "Email is not provided"
         })
     }
-    if(req.body.password){
+    if(!req.body.password){
         return res.status(400).send({
             message : "Password is not Provided"
         })
     }
-    
+
     const user = await User.findOne({email:req.body.email})
     if(user){
         if(user.password == req.body.password){
