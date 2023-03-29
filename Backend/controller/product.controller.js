@@ -24,3 +24,17 @@ exports.create = async (req,res) =>{
         })
     }
 }
+
+
+exports.findAll = async (req,res) =>{
+
+    try{
+    const products = await Product.find({})
+    return res.status(200).send(products)
+    }catch(err){
+        console.log("Error while fetching all Product",err);
+        return res.status(500).send({
+            message : "Internal server error"
+        })
+    }
+}
