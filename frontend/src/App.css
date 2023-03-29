@@ -64,6 +64,19 @@
   display: block;
 }
 
+.product-list{
+  text-align: center;
+}
+
+.product-list ul li{
+  display: inline-block;
+  border: 1px solid skyblue;
+  padding: 8px;
+  width: 80px;
+}
+.product-list ul{
+  margin:0px
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
