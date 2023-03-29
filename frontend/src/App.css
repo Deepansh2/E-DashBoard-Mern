@@ -10,6 +10,11 @@
   text-decoration:none;
 }
 
+.nav-ul{
+  padding: 5px;
+  margin: 0px;
+  background: gainsboro
+}
 
 .footer {
   position: absolute;
@@ -40,6 +45,16 @@
   border: 11p 5x black;
   width: 67px;
   padding:3px;
+}
+
+.nav-right{
+  text-align: right;
+}
+.logo{
+  width: 72px;
+  float: left;
+  border-radius: 50%;
+  margin-top: 1px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
