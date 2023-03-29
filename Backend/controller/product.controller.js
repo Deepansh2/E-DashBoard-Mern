@@ -38,3 +38,28 @@ exports.findAll = async (req,res) =>{
         })
     }
 }
+
+
+exports.delete = async(req,res) =>{
+
+    try{
+    const product = await Product.findOne({_id : req.params.id})
+    
+    if(product){
+        const product = await Product.deleteOne({_id:req.params.id})
+        return res.status(200).send({
+            message : "Deleted Successfully",
+            Product : product
+        })
+    }else{
+        return res.status(400).send({
+            message : "Product doesn't exist"
+        })
+    }
+}catch(err){
+    console.log("Error while deleting Product",err);
+    return res.status(500).send({
+        message : "Internal server error"
+    })
+}
+}
