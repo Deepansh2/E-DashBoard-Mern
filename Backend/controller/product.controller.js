@@ -63,3 +63,16 @@ exports.delete = async(req,res) =>{
     })
 }
 }
+
+exports.findOne = async(req,res) =>{
+
+    try{
+    const product = await Product.findById(req.params.id)
+    return res.status(200).send(product)
+    }catch(err){
+        console.log("Error while finding product by Id",err);
+        return res.status(500).send({
+            message : "Internal server error"
+        })
+    }
+}
