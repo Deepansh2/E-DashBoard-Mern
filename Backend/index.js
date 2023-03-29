@@ -24,6 +24,7 @@ db.once("open",()=>{
 })
 
 require("./route/user.route")(app)
+require("./route/product.route")(app)
 
 app.listen(serverConfig.PORT,()=>{
     console.log("Server started at Port:",serverConfig.PORT)
