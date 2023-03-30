@@ -76,3 +76,26 @@ exports.findOne = async(req,res) =>{
         })
     }
 }
+
+
+exports.update = async(req,res) =>{
+
+    try{
+    const product = await Product.findOne({_id:req.params.id})
+    if(product){
+        product.name = req.body.name != undefined ? req.body.name : product.name;
+        product.price =  req.body.price != undefined ? req.body.price : product.price;
+        product.category  = req.body.category != undefined ? req.body.category : product.category;
+        product.company  =  req.body.company != undefined ? req.body.company : product.company;
+        product.description  = req.body.description != undefined ? req.body.description : product.description;
+
+        const updatedProduct = await product.save()
+        return res.status(200).send(updatedProduct)
+    }
+}catch(err){
+    console.log("Error while updating product",err);
+    return res.status(500).send({
+        message : "Internal server error"
+    })
+}
+}

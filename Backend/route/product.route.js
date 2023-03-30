@@ -8,4 +8,5 @@ module.exports = (app) =>{
     app.get("/mern/products",productController.findAll)
     app.delete("/mern/product/:id",productController.delete)
     app.get("/mern/product/:id",productController.findOne)
+    app.put("/mern/product/:id",productController.update)
 }
