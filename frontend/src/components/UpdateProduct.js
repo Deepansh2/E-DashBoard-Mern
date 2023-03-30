@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import {useParams} from "react-router-dom"
+import {useParams,useNavigate} from "react-router-dom"
 
 const UpdateProduct = ()=>{
 
@@ -9,7 +9,8 @@ const UpdateProduct = ()=>{
     const [company,setCompany] = useState("")
     const [description,setDescription] = useState("")
     const params = useParams();
-    
+    const navigate = useNavigate()
+
     useEffect(()=>{
         GetProductDetail()
     },[])
@@ -29,7 +30,17 @@ const UpdateProduct = ()=>{
     const SaveProduct = async ()=>{
 
         const Data = {name,price,category,company,description}
-        console.warn(Data,"datatata")
+        let result = await fetch(`http://localhost:8000/mern/product/${params.id}`,{
+            method : "PUT",
+            body : JSON.stringify(Data),
+            headers : {
+                "Content-Type" : "application/json"
+            }
+        })
+        result = await result.json();
+        if(result){
+            navigate("/")
+        }
     }
     return(
         <div className="addProduct">
