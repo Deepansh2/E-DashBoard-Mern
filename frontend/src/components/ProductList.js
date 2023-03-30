@@ -14,7 +14,9 @@ const ProductList = ()=>{
             method : "GET"
         })
         result = await result.json()
-        setProducts(result)
+        if(result){
+            setProducts(result)
+        }
     }
     const DeleteProduct = async (id) =>{
         
@@ -26,9 +28,28 @@ const ProductList = ()=>{
             getProducts();
         }
     }
+
+    const searchProduct = async(event)=>{
+        let key = event.target.value
+        if(key){
+            let result = await fetch(`http://localhost:8000/mern/product/search/${key}`,{
+                method:"GET"
+            })
+            result = await result.json()
+            if(result){
+                setProducts(result)
+            }
+        }else{
+            getProducts()
+        }
+
+    }
     return (
         <div className="product-list">
             <h1>Product List</h1>
+            <input className="search-product-box" type="text" placeholder="Search Product"
+            onChange={searchProduct}
+            />
             <ul>
                 <li>S.No</li>
                 <li>Name</li>
@@ -36,10 +57,10 @@ const ProductList = ()=>{
                 <li>Category</li>
                 <li>Description</li>
                 <li>Company</li>
-                <li>Delete</li>
+                <li>Operation</li>
             </ul>
             {
-                products.map((item,index)=>
+                products.length>0 ? products.map((item,index)=>
                 <ul key = {item._id}>
                 <li>{index+1}</li>
                 <li>{item.name}</li>
@@ -52,6 +73,7 @@ const ProductList = ()=>{
                 </li>
                 </ul>
                 )
+                : <h1>No Result Found</h1>
             }
         </div>
     )

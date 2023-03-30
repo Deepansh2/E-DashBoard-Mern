@@ -12,11 +12,10 @@ const UpdateProduct = ()=>{
     const navigate = useNavigate()
 
     useEffect(()=>{
-        GetProductDetail()
+        getProductDetail()
     },[])
 
-    const GetProductDetail = async ()=>{
-        console.warn(params)
+    const getProductDetail = async ()=>{
         let result = await fetch(`http://localhost:8000/mern/product/${params.id}`,{
             method : "GET"
         })
