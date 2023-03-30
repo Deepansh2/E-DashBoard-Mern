@@ -99,3 +99,28 @@ exports.update = async(req,res) =>{
     })
 }
 }
+
+
+exports.search = async (req,res) =>{
+
+    try{
+    let key = req.params.key
+    const product = await Product.find({
+        $or:[
+        {name : {$regex: '.*'+key+'.*'}},
+        {company : {$regex: '.*'+key+'.*'}},
+        {category : {$regex: key}}
+        ]  
+    })
+    //$or:[
+    //     [name : {$regex:req.params.key}]
+    // ]
+
+    return res.status(200).send(product)
+}catch(err){
+    console.log("Error while searching with words",err);
+    return res.status(500).send({
+        message : "Internal server error"
+    })
+}
+}
