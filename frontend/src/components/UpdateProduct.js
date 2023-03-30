@@ -1,4 +1,5 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
+import {useParams} from "react-router-dom"
 
 const UpdateProduct = ()=>{
 
@@ -7,11 +8,28 @@ const UpdateProduct = ()=>{
     const [category,setCategory] = useState("")
     const [company,setCompany] = useState("")
     const [description,setDescription] = useState("")
-    const [error,setError] = useState(false)
+    const params = useParams();
+    
+    useEffect(()=>{
+        GetProductDetail()
+    },[])
+
+    const GetProductDetail = async ()=>{
+        console.warn(params)
+        let result = await fetch(`http://localhost:8000/mern/product/${params.id}`,{
+            method : "GET"
+        })
+        result = await result.json()
+        setName(result.name)
+        setPrice(result.price)
+        setCategory(result.category)
+        setCompany(result.company)
+        setDescription(result.description)
+    }
     const SaveProduct = async ()=>{
 
         const Data = {name,price,category,company,description}
-        console.warn(Data)
+        console.warn(Data,"datatata")
     }
     return(
         <div className="addProduct">
