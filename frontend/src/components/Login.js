@@ -22,9 +22,9 @@ const Login = ()=>{
             }
         })
         result = await result.json()
-        console.warn(result)
-        if(result.user.name){
+        if(result.user){
             localStorage.setItem("user",JSON.stringify(result))
+            localStorage.setItem("token",JSON.stringify(result.user.accessToken))
             navigate("/")
         }
         else{

@@ -11,7 +11,10 @@ const ProductList = ()=>{
 
     const getProducts = async()=>{
         let result = await fetch("http://localhost:8000/mern/products",{
-            method : "GET"
+            method : "GET",
+            headers :{
+                "x-access-token" :JSON.parse(localStorage.getItem("token"))
+            }
         })
         result = await result.json()
         if(result){
