@@ -1,5 +1,6 @@
 const User = require("../model/user.model");
-
+const jwt = require("jsonwebtoken")
+const authConfig = require("../config/auth.config")
 
 
 exports.signup = async (req,res) =>{
@@ -48,10 +49,12 @@ exports.signin = async (req,res) =>{
     const user = await User.findOne({email:req.body.email})
     if(user){
         if(user.password == req.body.password){
+            const token = jwt.sign({id:user.name},authConfig.secret,{expiresIn:20000})
             const response = {
                 id : user._id,
                 name : user.name,
-                email : user.email
+                email : user.email,
+                accessToken : token
             }
             return res.status(200).send({
                 message : "LoggedIn Successfully",
