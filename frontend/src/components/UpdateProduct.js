@@ -17,7 +17,10 @@ const UpdateProduct = ()=>{
 
     const getProductDetail = async ()=>{
         let result = await fetch(`http://localhost:8000/mern/product/${params.id}`,{
-            method : "GET"
+            method : "GET",
+            headers :{
+                "x-access-token" :JSON.parse(localStorage.getItem("token"))
+            }
         })
         result = await result.json()
         setName(result.name)
@@ -33,7 +36,8 @@ const UpdateProduct = ()=>{
             method : "PUT",
             body : JSON.stringify(Data),
             headers : {
-                "Content-Type" : "application/json"
+                "Content-Type" : "application/json",
+                "x-access-token" :JSON.parse(localStorage.getItem("token"))
             }
         })
         result = await result.json();

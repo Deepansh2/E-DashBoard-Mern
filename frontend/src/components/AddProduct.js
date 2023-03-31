@@ -23,7 +23,8 @@ const AddProduct = ()=>{
             method : "POST",
             body : JSON.stringify(Data),
             headers:{
-                "Content-Type" : "application/json"
+                "Content-Type" : "application/json",
+                "x-access-token" :JSON.parse(localStorage.getItem("token"))
             }
         })
         result = await result.json()

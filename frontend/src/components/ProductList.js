@@ -24,7 +24,10 @@ const ProductList = ()=>{
     const DeleteProduct = async (id) =>{
         
         let result = await fetch(`http://localhost:8000/mern/product/${id}`,{
-            method:"DELETE"
+            method:"DELETE",
+            headers :{
+                "x-access-token" :JSON.parse(localStorage.getItem("token"))
+            }
         })
         result = await result.json()
         if(result){
